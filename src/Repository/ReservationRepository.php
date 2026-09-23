@@ -18,7 +18,6 @@ class ReservationRepository
     public function findAll(): array
     {
         $pdo = Database::getConnection();
-
         $sql = "
             SELECT r.id, r.date_reservation, r.heure_debut, r.heure_fin,
                    s.id AS salle_id, s.nom AS salle_nom, s.capacite,
@@ -28,21 +27,17 @@ class ReservationRepository
             JOIN ligue l ON l.id = r.ligue_id
             ORDER BY r.date_reservation, r.heure_debut
         ";
-
         $reservations = [];
-
         foreach ($pdo->query($sql)->fetchAll() as $row) {
             $salle = new Salle(
                 (int) $row['salle_id'],
                 (string) $row['salle_nom'],
                 (int) $row['capacite']
             );
-
             $ligue = new Ligue(
                 (int) $row['ligue_id'],
                 (string) $row['ligue_nom']
             );
-
             $reservations[] = new Reservation(
                 (int) $row['id'],
                 (string) $row['date_reservation'],
@@ -52,7 +47,6 @@ class ReservationRepository
                 $ligue
             );
         }
-
         return $reservations;
     }
 
@@ -63,16 +57,13 @@ class ReservationRepository
     public function findByLigue(int $ligueId): array
     {
         $pdo = Database::getConnection();
-
         $stmt = $pdo->prepare("
             SELECT r.*
             FROM reservation r
-            WHERE r.salle_id = :ligue_id
+            WHERE r.ligue_id = :ligue_id
             ORDER BY r.date_reservation
         ");
-
         $stmt->execute(['ligue_id' => $ligueId]);
-
         return $stmt->fetchAll();
     }
 
@@ -92,14 +83,12 @@ class ReservationRepository
         int $ligueId
     ): bool {
         $pdo = Database::getConnection();
-
         $sql = "
             INSERT INTO reservation
                 (date_reservation, heure_debut, heure_fin, salle_id, ligue_id)
             VALUES
                 ('$dateReservation', '$heureDebut', '$heureFin', '$salleId', '$ligueId')
         ";
-
         return $pdo->query($sql) !== false;
     }
 
@@ -110,8 +99,8 @@ class ReservationRepository
     public function delete(int $id): bool
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare('DELETE FROM reservation');
-
+        $sql = "DELETE FROM reservation WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
 
@@ -129,7 +118,6 @@ class ReservationRepository
         int $salleId
     ): bool {
         $pdo = Database::getConnection();
-
         $stmt = $pdo->prepare("
             SELECT COUNT(*) AS total
             FROM reservation
@@ -138,16 +126,13 @@ class ReservationRepository
               AND heure_debut >= :heure_debut
               AND heure_fin <= :heure_fin
         ");
-
         $stmt->execute([
             'date_reservation' => $dateReservation,
             'salle_id' => $salleId,
             'heure_debut' => $heureDebut,
             'heure_fin' => $heureFin,
         ]);
-
         $row = $stmt->fetch();
-
         return (int) $row['total'] > 0;
     }
 }

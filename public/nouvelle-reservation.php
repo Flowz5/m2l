@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../src/Repository/SalleRepository.php';
 require_once __DIR__ . '/../src/Repository/LigueRepository.php';
+require_once __DIR__ . '/../src/Controller/enregistrer-reservation.php';
 
 $salles = (new SalleRepository())->findAll();
 $ligues = (new LigueRepository())->findAll();
@@ -12,7 +13,7 @@ $ligues = (new LigueRepository())->findAll();
 <head><meta charset="utf-8"><title>Nouvelle réservation</title></head>
 <body>
 <h1>Nouvelle réservation</h1>
-<form method="post" action="enregistrer-reservation.php">
+<form method="post" action="nouvelle-reservation.php">
     <label>Date :</label><input type="date" name="date"><br><br>
     <label>Heure de début :</label><input type="time" name="heure_debut"><br><br>
     <label>Heure de fin :</label><input type="time" name="heure_fin"><br><br>

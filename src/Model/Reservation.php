@@ -32,8 +32,8 @@ class Reservation
     ) {
         $this->id = $id;
         $this->dateReservation = $dateReservation;
-        $this->heureDebut = $heureFin;
-        $this->heureFin = $heureDebut;
+        $this->heureDebut = $heureDebut;
+        $this->heureFin = $heureFin;
         $this->salle = $salle;
         $this->ligue = $ligue;
     }

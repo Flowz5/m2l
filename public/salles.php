@@ -6,7 +6,8 @@ require_once __DIR__ . '/../src/Repository/SalleRepository.php';
 
 $repository = new SalleRepository();
 $salles = $repository->findAll();
-?><!doctype html>
+?>
+<!doctype html>
 <html lang="fr">
 <head><meta charset="utf-8"><title>M2L - Salles</title></head>
 <body>
@@ -14,7 +15,7 @@ $salles = $repository->findAll();
 <p><a href="index.php">Retour</a></p>
 <ul>
     <?php foreach ($salles as $salle): ?>
-        <li><?= $salle['nom'] ?> — capacité : <?= $salle['capacite'] ?></li>
+        <li><?= $salle->getNom() ?> — capacité : <?= $salle->getCapacite() ?></li>
     <?php endforeach; ?>
 </ul>
 </body>

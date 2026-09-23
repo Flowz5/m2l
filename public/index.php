@@ -3,6 +3,12 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../src/Repository/ReservationRepository.php';
+require_once __DIR__ . '/../src/Repository/ReservationRepository.php';
+
+if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id'])) {
+    require_once __DIR__ . '/../src/Controller/supprimer-reservation.php';
+    exit;
+}
 
 $repository = new ReservationRepository();
 $reservations = $repository->findAll();
@@ -26,7 +32,7 @@ $reservations = $repository->findAll();
             <td><?= $reservation->getCreneau() ?></td>
             <td><?= $reservation->salle->getNom() ?></td>
             <td><?= $reservation->ligue->getNom() ?></td>
-            <td><a href="supprimer-reservation.php?id=<?= $reservation->id ?>">Annuler</a></td>
+            <td><a href="index.php?action=supprimer&id=<?= $reservation->id ?>">Annuler</a></td>
         </tr>
     <?php endforeach; ?>
 </table>
