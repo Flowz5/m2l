@@ -7,6 +7,10 @@ require_once __DIR__ . '/../../data/ReservationRepository.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $repository = new ReservationRepository();
 
+    if (empty($_POST['date']) || empty($_POST['heure_debut']) || empty($_POST['heure_fin'])) {
+        die("Erreur : veuillez remplir la date et les heures.");
+    }
+
     $date = $_POST['date'];
     $heureDebut = $_POST['heure_debut'];
     $heureFin = $_POST['heure_fin'];
