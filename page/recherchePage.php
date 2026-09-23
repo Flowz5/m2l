@@ -1,0 +1,21 @@
+<?php require_once __DIR__ . '/template/header.php'; ?>
+
+    <form action="index.php" method="get">
+        <input type="hidden" name="route" value="recherche">
+        <select name="ligue_id">
+            <?php foreach ($ligues as $ligue): ?>
+                <option value="<?= $ligue->id ?>"><?= $ligue->getNom() ?></option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Rechercher</button>
+    </form>
+
+<?php if (isset($_GET['ligue_id'])): ?>
+    <ul>
+        <?php foreach ($resultats as $reservation): ?>
+            <li><?= $reservation['date_reservation'] ?> : <?= $reservation['heure_debut'] ?> - <?= $reservation['heure_fin'] ?></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php require_once __DIR__ . '/template/footer.php'; ?>
