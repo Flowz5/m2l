@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../src/Repository/ReservationRepository.php';
-require_once __DIR__ . '/../src/Repository/ReservationRepository.php';
+require_once __DIR__ . '/../data/ReservationRepository.php';
 
 if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['id'])) {
     require_once __DIR__ . '/../src/Controller/supprimer-reservation.php';

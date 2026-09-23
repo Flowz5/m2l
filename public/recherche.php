@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../src/Repository/LigueRepository.php';
-require_once __DIR__ . '/../src/Repository/ReservationRepository.php';
+require_once __DIR__ . '/../data/LigueRepository.php';
+require_once __DIR__ . '/../data/ReservationRepository.php';
 
 $ligues = (new LigueRepository())->findAll();
 $repository = new ReservationRepository();

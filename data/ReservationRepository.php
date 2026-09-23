@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../Model/Salle.php';
-require_once __DIR__ . '/../Model/Ligue.php';
-require_once __DIR__ . '/../Model/Reservation.php';
+require_once __DIR__ . '/../src/Model/Salle.php';
+require_once __DIR__ . '/../src/Model/Ligue.php';
+require_once __DIR__ . '/../src/Model/Reservation.php';
 require_once __DIR__ . '/Database.php';
 
 /**
